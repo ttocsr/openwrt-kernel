@@ -48,8 +48,21 @@
 #ifndef _UAPI_LIBC_COMPAT_H
 #define _UAPI_LIBC_COMPAT_H
 
+<<<<<<< HEAD
 /* We have included libc headers... */
 #if !defined(__KERNEL__)
+=======
+/* musl defines the ethhdr struct itself in its netinet/if_ether.h.
+ * Glibc just includes the kernel header and uses a different guard. */
+#if defined(_NETINET_IF_ETHER_H)
+#define __UAPI_DEF_ETHHDR		0
+#else
+#define __UAPI_DEF_ETHHDR		1
+#endif
+
+/* We have included glibc headers... */
+#if defined(__GLIBC__)
+>>>>>>> 84492625c144... uapi if_ether.h prevent ethhdr redefinition
 
 /* Coordinate with libc net/if.h header. */
 #if defined(_NET_IF_H) && defined(__USE_MISC)
